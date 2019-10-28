@@ -15,10 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from . import views
+from django.conf.urls import url,include
+from socklogin import views
 
 urlpatterns = [
-    path('', views.index),
-    path('socks/', include('socks.urls')),
     path('admin/', admin.site.urls),
+    url(r'^$',views.index,name='index'),
+    url(r'^special/',views.special,name='special'),
+    url(r'^socklogin/',include('socklogin.urls')),
+    url(r'^logout/$', views.user_logout, name='logout'),
+    # path('socks/', include('socks.urls')),
+    # path('admin/', admin.site.urls),
 ]
